@@ -9,9 +9,10 @@ class AppBarHome extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return SizedBox(
-      height: 100,
+      height: 123,
       // color: Color.fromARGB(255, 255, 234, 148),
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
         children: [
     
           //Linha dos botões.
@@ -33,7 +34,10 @@ class AppBarHome extends StatelessWidget {
     
           //Linha do titulo.
           const Padding(
-            padding: EdgeInsets.only(left:26),
+            padding: EdgeInsets.only(
+              left: 24,
+              bottom: 24,
+              ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -42,7 +46,7 @@ class AppBarHome extends StatelessWidget {
                   style: TextStyle(
                     fontFamily: 'Google',
                     fontWeight: FontWeight.bold,
-                    fontSize: 28,
+                    fontSize: 32,
                   ),
                 ),
               ],

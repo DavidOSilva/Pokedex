@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pokedex/common/models/pokemon.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:pokedex/features/pokedex/screens/details/container/details_container.dart';
-import 'package:pokedex/features/pokedex/screens/home/widgets/pokeItem.dart';
+import 'package:pokedex/features/pokedex/screens/home/widgets/homePokeItem.dart';
 
 class PokeGrid extends StatelessWidget {
   const PokeGrid({super.key, required this.pokemons, required this.onItemTap});
@@ -47,7 +47,10 @@ class PokeGrid extends StatelessWidget {
                   child: FadeInAnimation(
                     child: GestureDetector(
                       onTap: () {
-                        onItemTap('/details', DetailArguments(pokemon: pokemons[index]));
+                        onItemTap(
+                          '/details',
+                          DetailArguments(pokemon: pokemons[index], index: index)
+                          );
                       },
 
                       //PokeItem.

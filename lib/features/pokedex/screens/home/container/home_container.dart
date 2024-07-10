@@ -24,7 +24,10 @@ class HomeContainer extends StatelessWidget {
           return LoadingDefault();
         }
         else if(snapshot.connectionState == ConnectionState.done && snapshot.hasData){
-          return HomePage(pokemons: snapshot.data!, onItemTap: onItemTap);
+          return HomePage(
+            pokemons: snapshot.data!,
+            onItemTap: onItemTap,
+            );
         }
         else if (snapshot.hasError){
           return ErrorDefault(

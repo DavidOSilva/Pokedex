@@ -7,11 +7,12 @@ import 'package:pokedex/common/widgets/loading.dart';
 import 'package:pokedex/features/pokedex/screens/details/pages/detail_page.dart';
 
 class DetailArguments{
-  DetailArguments({required this.pokemon});
+  DetailArguments({this.index=0, required this.pokemon});
   final Pokemon pokemon;
+  final int? index;
 }
 
-class DetailsContainer extends StatelessWidget {
+class DetailsContainer extends StatefulWidget {
   const DetailsContainer({
     super.key,
     required this.repository,
@@ -23,18 +24,46 @@ class DetailsContainer extends StatelessWidget {
   final VoidCallback onBack;
 
   @override
+  State<DetailsContainer> createState() => _DetailsContainerState();
+}
+
+class _DetailsContainerState extends State<DetailsContainer> {
+  late PageController _controller;
+  late Future<List<Pokemon>> _future;
+  Pokemon? _pokemon;
+
+  @override
+  void initState() {
+    _controller = PageController(
+      viewportFraction: 0.5,
+      initialPage: widget.arguments.index!,
+    );
+    _future = widget.repository.obterTodosPokemons();
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: repository.obterTodosPokemons(), //Carrega todos os Pokémons válidos do JSON.
+      future: _future, //Carrega todos os Pokémons válidos do JSON.
       builder: (context, snapshot){
         if(snapshot.connectionState == ConnectionState.waiting){
           return LoadingDefault();
         }
         else if(snapshot.connectionState == ConnectionState.done && snapshot.hasData){
+          if (_pokemon == null){
+            _pokemon = widget.arguments.pokemon;
+          }
           return DetailPage(
-            pokemon: arguments.pokemon,
+            pokemon: _pokemon!,
             pokemons: snapshot.data!,
-            onBack: onBack,
+            onBack: widget.onBack,
+            controller: _controller,
+            onChangePokemon: (Pokemon value) {
+              setState(() {
+                _pokemon = value;
+              });
+            },
           );
         }
         else if (snapshot.hasError){

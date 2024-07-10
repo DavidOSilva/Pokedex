@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pokedex/common/consts/constPaths.dart';
 import 'package:pokedex/common/models/pokemon.dart';
 import 'package:pokedex/features/pokedex/screens/details/container/details_container.dart';
-import 'package:pokedex/features/pokedex/screens/home/widgets/appBar.dart';
-import 'package:pokedex/features/pokedex/screens/home/widgets/pokeGrid.dart';
+import 'package:pokedex/features/pokedex/screens/home/widgets/homeAppBar.dart';
+import 'package:pokedex/features/pokedex/screens/home/widgets/homePokeGrid.dart';
 
 
 class HomePage extends StatelessWidget {
@@ -47,7 +47,10 @@ class HomePage extends StatelessWidget {
               AppBarHome(),
 
               //Grid.
-              PokeGrid(pokemons: pokemons, onItemTap: onItemTap),
+              PokeGrid(
+                pokemons: pokemons,
+                onItemTap: onItemTap,
+              ),
               
             ],
           ),

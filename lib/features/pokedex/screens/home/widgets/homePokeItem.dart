@@ -34,6 +34,7 @@ class PokeItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(bordaRadius),
           child: Stack(
             children: [
+              
               //Imagem da Pokebola.
               Padding(
                 padding: const EdgeInsets.only(
